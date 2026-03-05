@@ -4,33 +4,33 @@ import java.util.Scanner;
 
 class NumbersOperations {
     public static void main(String[] args) {
-        Scanner s = new Scanner(System.in);
-        List<Integer> list = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+        List<Integer> userNumbers = new ArrayList<>();
         System.out.println("Ile liczb wczytać?");
-        int x = s.nextInt();
-        for (int i = 0; i < x; i++) {
+        int numberOfNumbers = scanner.nextInt();
+        for (int i = 0; i < numberOfNumbers; i++) {
             System.out.println("Podaj kolejną liczbę:");
-            list.add(s.nextInt());
+            userNumbers.add(scanner.nextInt());
         }
-        List<Integer> pos = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i) >= 0)
-                pos.add(list.get(i));
+        List<Integer> positiveNumbers = new ArrayList<>();
+        for (int i = 0; i < userNumbers.size(); i++) {
+            if (userNumbers.get(i) >= 0)
+                positiveNumbers.add(userNumbers.get(i));
         }
-        List<Integer> neg = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i) < 0)
-                neg.add(list.get(i));
+        List<Integer> negativeNumbers = new ArrayList<>();
+        for (int i = 0; i < userNumbers.size(); i++) {
+            if (userNumbers.get(i) < 0)
+                negativeNumbers.add(userNumbers.get(i));
         }
-        int spos = 0;
-        for (int i = 0; i < pos.size(); i++) {
-            spos += pos.get(i);
+        int positiveNumbersSum = 0;
+        for (int i = 0; i < positiveNumbers.size(); i++) {
+            positiveNumbersSum += positiveNumbers.get(i);
         }
-        int sneg = 0;
-        for (int i = 0; i < neg.size(); i++) {
-            sneg += neg.get(i);
+        int negativeNumbersSum = 0;
+        for (int i = 0; i < negativeNumbers.size(); i++) {
+            negativeNumbersSum += negativeNumbers.get(i);
         }
-        System.out.println("Suma wprowadzonych liczb dodatnich: " + spos);
-        System.out.println("Suma wprowadzonych liczb ujemnych: " + sneg);
+        System.out.println("Suma wprowadzonych liczb dodatnich: " + positiveNumbersSum);
+        System.out.println("Suma wprowadzonych liczb ujemnych: " + negativeNumbersSum);
     }
 }
