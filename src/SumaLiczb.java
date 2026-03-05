@@ -1,14 +1,15 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.function.Predicate;
 
 class NumbersOperations {
     public static void main(String[] args) {
         List<Integer> userNumbers = getNumbersFromUser();
-        List<Integer> positiveNumbers = getPositiveNumbers(userNumbers);
-        List<Integer> negativeNumbers = getNegativeNumbers(userNumbers);
-        int positiveNumbersSum = positiveNumbersSum(positiveNumbers);
-        int negativeNumbersSum = negativeNumbersSum(negativeNumbers);
+        List<Integer> positiveNumbers = filterNumbers(userNumbers, x -> x >= 0);
+        List<Integer> negativeNumbers = filterNumbers(userNumbers, x -> x < 0);
+        int positiveNumbersSum = sumNumbers(positiveNumbers);
+        int negativeNumbersSum = sumNumbers(negativeNumbers);
         printResults(positiveNumbersSum, negativeNumbersSum);
     }
 
@@ -17,15 +18,7 @@ class NumbersOperations {
         System.out.println("Suma wprowadzonych liczb ujemnych: " + negativeNumbersSum);
     }
 
-    private static int negativeNumbersSum(List<Integer> negativeNumbers) {
-        int negativeNumbersSum = 0;
-        for (int i = 0; i < negativeNumbers.size(); i++) {
-            negativeNumbersSum += negativeNumbers.get(i);
-        }
-        return negativeNumbersSum;
-    }
-
-    private static int positiveNumbersSum(List<Integer> positiveNumbers) {
+    private static int sumNumbers(List<Integer> positiveNumbers) {
         int positiveNumbersSum = 0;
         for (int i = 0; i < positiveNumbers.size(); i++) {
             positiveNumbersSum += positiveNumbers.get(i);
@@ -33,22 +26,13 @@ class NumbersOperations {
         return positiveNumbersSum;
     }
 
-    private static List<Integer> getNegativeNumbers(List<Integer> userNumbers) {
-        List<Integer> negativeNumbers = new ArrayList<>();
-        for (int i = 0; i < userNumbers.size(); i++) {
-            if (userNumbers.get(i) < 0)
-                negativeNumbers.add(userNumbers.get(i));
+    private static List<Integer> filterNumbers(List<Integer> numbers, Predicate<Integer> predicate) {
+        List<Integer> filteredNumbers = new ArrayList<>();
+        for (int i = 0; i < numbers.size(); i++) {
+            if (predicate.test(numbers.get(i)))
+                filteredNumbers.add(numbers.get(i));
         }
-        return negativeNumbers;
-    }
-
-    private static List<Integer> getPositiveNumbers(List<Integer> userNumbers) {
-        List<Integer> positiveNumbers = new ArrayList<>();
-        for (int i = 0; i < userNumbers.size(); i++) {
-            if (userNumbers.get(i) >= 0)
-                positiveNumbers.add(userNumbers.get(i));
-        }
-        return positiveNumbers;
+        return filteredNumbers;
     }
 
     private static List<Integer> getNumbersFromUser() {
